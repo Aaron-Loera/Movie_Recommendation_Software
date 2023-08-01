@@ -1,3 +1,2 @@
-#Represnents a graph connecting all vertices (movies)
-class movie_graph():
-    pass
+#Asks for the users input
+print("Welcome to Aaron's Movie Recommendation Software!")
