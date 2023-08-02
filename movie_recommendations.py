@@ -20,5 +20,5 @@ the_hitmans_bodyguard = MovieVertex("The Hitman's Bodyguard", "Comedy", 4, "An u
 the_hitmans_bodyguard2 = MovieVertex("The Hitman's Bodyguard 2", "Comedy", 3, "Our favorite bodyguard returns to save our previous hitman's wife.")
 
 
-print(iron_man.edges)
+print(iron_man.name)
 
