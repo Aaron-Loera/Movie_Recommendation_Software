@@ -3,6 +3,13 @@ class MovieGraph():
     def __init__(self):
         self.graph = {}
     
-    #adds a movie vertex to a graph
+    #adds a movie vertex to the corresponding genre key in graph
     def add_movie(self, movie_vertex):
-        self.graph[movie_vertex.name] = movie_vertex.edges
+        if movie_vertex.genre in self.graph:
+            self.graph[movie_vertex.genre].append(movie_vertex.name)
+        else:
+            self.graph[movie_vertex.genre] = [movie_vertex.name]
+
+    #searches for the specified movie using depth-first search
+    def find_movie(self, target):
+        pass

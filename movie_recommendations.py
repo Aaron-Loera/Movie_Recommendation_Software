@@ -1,4 +1,4 @@
-#imports the MovieVertex class from the movie_vertex file and MovieGraph from movie_graph
+#imports the MovieVertex class from the movie_vertex file and MovieGraph from the movie_graph file
 from movie_vertex import MovieVertex
 from movie_graph import MovieGraph
 
@@ -20,10 +20,13 @@ the_hangover = MovieVertex("The Hangover", "Comedy", 4.5, "3 friends look for th
 the_hitmans_bodyguard = MovieVertex("The Hitman's Bodyguard", "Comedy", 4, "An uptight bodyguard is forced to protect a unique natured hitman.")
 the_hitmans_bodyguard2 = MovieVertex("The Hitman's Bodyguard 2", "Comedy", 3, "Our favorite bodyguard returns to save our previous hitman's wife.")
 
-# iron_man.add_recommended_movies(iron_man2)
+iron_man.add_recommended_movies(iron_man2)
+iron_man2.add_recommended_movies(iron_man)
 
-# movie_graph = MovieGraph()
+movie_graph = MovieGraph()
 
-# movie_graph.add_movie(iron_man)
-# print(movie_graph.graph)
+movie_graph.add_movie(iron_man)
+movie_graph.add_movie(iron_man2)
+
+print(movie_graph.graph)
 
