@@ -27,6 +27,8 @@ movie_graph = MovieGraph()
 
 movie_graph.add_movie(iron_man)
 movie_graph.add_movie(iron_man2)
+movie_graph.add_movie(jigsaw)
+movie_graph.add_movie(arrival)
 
 print(movie_graph.graph)
 
