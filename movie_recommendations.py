@@ -32,44 +32,45 @@ movie_graph.add_movie(iron_man2)
 movie_graph.add_movie(jigsaw)
 movie_graph.add_movie(arrival)
 
-print(movie_graph.graph)
+# print(movie_graph.graph)
 
 
-# #beginning of software recommendation system
-# def software_recommendation(graph_name):
-#     #asks for the users input
-#     user_choice = input("Welcome to Aaron's Movie Recommendations! We're glad to see you here and hope to provide you with the best movies for your taste! Let us know if you're looking for a specific movie or if you would like to see out recommendations. Please type (r) if you would like to see our recommendations or (s) if you want to see if we have a particular movie: ")
+#beginning of software recommendation system
+def software_recommendation(graph_name):
+    #asks for the users input
+    user_choice = input("Welcome to Aaron's Movie Recommendations! We're glad to see you here and hope to provide you with the best movies for your taste! Let us know if you're looking for a specific movie or if you would like to see out recommendations. Please type (r) if you would like to see our recommendations or (s) if you want to see if we have a particular movie: ")
 
-#     #checks if the input is a valid option
-#     while (user_choice != 'r') and (user_choice != 's'):
-#         user_choice = input("Sorry that was an invalid option. Please type (r) if you would like to see our recommendations or (s) if you want to see if we have a particular movie: ")
+    #checks if the input is a valid option
+    while (user_choice != 'r') and (user_choice != 's'):
+        user_choice = input("Sorry that was an invalid option. Please type (r) if you would like to see our recommendations or (s) if you want to see if we have a particular movie: ")
 
-#     #lets the user choose which genre they would like to explore
-#     if user_choice == 'r':
-#         genres = [genre for genre in graph_name.graph]
-#         print(f"Here are our genres we have available: {genres}")
-#         user_choice = input("Which genre would you like to explore: ")
+    #lets the user choose which genre they would like to explore
+    if user_choice == 'r':
+        genres = [genre for genre in graph_name.graph]
+        print(f"Here are our genres we have available: {genres}")
+        user_choice = input("Which genre would you like to explore: ")
         
-#         #checks if the users input is a valid genre
-#         while user_choice not in genres:
-#             user_choice = input("Sorry that isn't a valid genre. Which genre would you like to explore: ")
+        #checks if the users input is a valid genre
+        while user_choice not in genres:
+            user_choice = input("Sorry that isn't a valid genre. Which genre would you like to explore: ")
         
-#         #shows all films under the chosen genre and asks the user to choose one
-#         print(f"Great choice! Here are the top films we recommend for this genre: {graph_name.graph[user_choice]}\n")
-#         user_choice2 = input("Which film would you like to check out: ")
+        #shows all films under the chosen genre and asks the user to choose one
+        chosen_genre = graph_name.graph[user_choice]
+        print(f"Great choice! Here are the top films we recommend for this genre: {chosen_genre}")
+        user_choice2 = input("Which film would you like to check out: ")
 
-#         #checks if the users input it a valid movie
-#         while user_choice2 not in graph_name.graph[user_choice]:
-#             user_choice2 = input("Sorry that isn't one of our listed films. Please pick which film you would like to check out: ")
+        #checks if the users input it a valid movie
+        while user_choice2 not in graph_name.graph[user_choice]:
+            user_choice2 = input("Sorry that isn't one of our listed films. Please pick which film you would like to check out: ")
         
-#         print(user_choice2)
+        print(user_choice2)
 
     
-#     #returns if the movie provided by the user exists within the graph
-#     else:
-#         print("Great, we hope we have the movie you're looking for...")
-#         user_choice = input("Please type in the movie name you are searching for: ")
+    #returns if the movie provided by the user exists within the graph
+    else:
+        print("Great, we hope we have the movie you're looking for...")
+        user_choice = input("Please type in the movie name you are searching for: ")
         
-# software_recommendation(movie_graph)
+software_recommendation(movie_graph)
 
 
