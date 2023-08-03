@@ -14,6 +14,10 @@ class MovieVertex():
     #adds a new edge to the current vertex
     def add_recommended_movies(self, new_movie):
         self.edges[new_movie.name] = list(new_movie.get_movie_information())
+    
+    #represents the object as a string
+    def __repr__(self):
+        return self.name
 
 
 # movie1 = MovieVertex('Movie 1', 'Action', 4, 'This is movie one')

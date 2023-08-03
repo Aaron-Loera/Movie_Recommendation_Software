@@ -6,9 +6,9 @@ class MovieGraph():
     #adds a movie vertex to the corresponding genre key in graph
     def add_movie(self, movie_vertex):
         if movie_vertex.genre in self.graph:
-            self.graph[movie_vertex.genre].append(movie_vertex.name)
+            self.graph[movie_vertex.genre].append([movie_vertex.name, movie_vertex])
         else:
-            self.graph[movie_vertex.genre] = [movie_vertex.name]
+            self.graph[movie_vertex.genre] = [[movie_vertex.name, movie_vertex]]
 
     #searches for the specified movie using depth-first search
     def find_movie(self, target):
