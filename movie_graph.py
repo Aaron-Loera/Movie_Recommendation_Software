@@ -3,7 +3,7 @@ class MovieGraph():
     def __init__(self):
         self.graph = {}
     
-    #adds a movie vertex to the corresponding genre key in graph
+    #adds a movie vertex to the corresponding genre in graph
     def add_movie(self, movie_vertex):
         if movie_vertex.genre in self.graph:
             self.graph[movie_vertex.genre].append(movie_vertex)

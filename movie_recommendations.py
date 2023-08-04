@@ -48,25 +48,29 @@ def software_recommendation(graph_name):
     if user_choice == 'r':
         genres = [genre for genre in graph_name.graph]
         print(f"Here are our genres we have available: {genres}")
-        user_choice = input("Which genre would you like to explore: ")
+        user_genre_choice = input("Which genre would you like to explore: ")
         
         #checks if the users input is a valid genre
-        while user_choice not in genres:
-            user_choice = input("Sorry that isn't a valid genre. Which genre would you like to explore: ")
+        while user_genre_choice not in genres:
+            user_genre_choice = input("Sorry that isn't a valid genre. Which genre would you like to explore: ")
         
         #shows all films under the chosen genre and asks the user to choose one
-        chosen_genre = graph_name.graph[user_choice]
-        print(f"Great choice! Here are the top films we recommend for this genre: {chosen_genre}")
-        user_choice2 = input("Which film would you like to check out: ")
+        chosen_genre = graph_name.graph[user_genre_choice]
+        print(f"Great choice! Here are the top films we recommend for this genre, {chosen_genre}")
+        user_movie_choice = input("Which film would you like to check out: ")
 
         #checks if the users input it a valid movie
-        while user_choice2 not in graph_name.graph[user_choice]:
-            user_choice2 = input("Sorry that isn't one of our listed films. Please pick which film you would like to check out: ")
+        movies_in_genre = [movie.name for movie in chosen_genre]
+        while user_movie_choice not in movies_in_genre:
+            user_movie_choice = input("Sorry that isn't one of our listed films. Please pick which film you would like to check out: ")
         
-        print(user_choice2)
+        #identifies which movie the user has chosen and returns the movies information
+        for movie in chosen_genre:
+            if user_movie_choice == movie.name:
+                print("Awesome pick! Here are all the details for " + movie.name + ": " + str(movie.get_movie_information()))
 
     
-    #returns if the movie provided by the user exists within the graph
+    #returns true/false on whether the movie provided by the user exists within the graph
     else:
         print("Great, we hope we have the movie you're looking for...")
         user_choice = input("Please type in the movie name you are searching for: ")
