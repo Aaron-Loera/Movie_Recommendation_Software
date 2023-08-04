@@ -73,8 +73,7 @@ def search_movie_recommendations(graph_name):
     
     #returns true/false on whether the movie provided by the user exists within the graph
     else:
-        print("Great, we hope we have the movie you're looking for...")
-        user_choice = input("Please type in the movie name you are searching for: ")
+        user_choice = input("Great, we hope we have the movie you're looking for. Please type in the movie name you are searching for: ")
 
 
 #if applicable the software recommends similar movies to the user
