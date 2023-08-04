@@ -9,7 +9,7 @@ class MovieVertex():
 
     #retuns all the following information of the current movie object
     def get_movie_information(self):
-        return self.genre, self.rating, self.description
+        return "Genre: " + self.genre, "Rating: " + str(self.rating), "Description: " + self.description
 
     #adds a new edge to the current vertex
     def add_recommended_movies(self, new_movie):
