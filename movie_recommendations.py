@@ -73,7 +73,22 @@ def search_movie_recommendations(graph_name):
     
     #returns true/false on whether the movie provided by the user exists within the graph
     else:
-        user_choice = input("Great, we hope we have the movie you're looking for. Please type in the movie name you are searching for: ")
+        #askes the user for a specified movie name and movie genre
+        genres = [genre for genre in movie_graph.graph]
+        user_movie_choice = input("Great, we hope we have the movie you're looking for. Please type in the movie name you are searching for: ")
+        user_genre_choice = input("Awesome, and what genre does it fall under from the following " + str(genres) + ": ")
+
+        #checks if the users specified genre is in the provided genres
+        while user_genre_choice not in genres:
+            user_genre_choice = input("Sorry that's not a valid genre. What genre does your movie fall in: ")
+
+        print("Alright let's check if we have your movie")
+        movie_search_result = movie_graph.find_movie(user_genre_choice, user_movie_choice)
+        if movie_search_result == False:
+            print("Sorry it seems we don't have that movie in our inventory!")
+        else:
+            print(movie_search_result)
+
 
 
 #if applicable the software recommends similar movies to the user
