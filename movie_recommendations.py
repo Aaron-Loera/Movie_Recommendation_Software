@@ -36,7 +36,7 @@ movie_graph.add_movie(arrival)
 
 
 #beginning of software recommendation system
-def software_recommendation(graph_name):
+def search_movie_recommendations(graph_name):
     #asks for the users input
     user_choice = input("Welcome to Aaron's Movie Recommendations! We're glad to see you here and hope to provide you with the best movies for your taste! Let us know if you're looking for a specific movie or if you would like to see out recommendations. Please type (r) if you would like to see our recommendations or (s) if you want to see if we have a particular movie: ")
 
@@ -64,17 +64,23 @@ def software_recommendation(graph_name):
         while user_movie_choice not in movies_in_genre:
             user_movie_choice = input("Sorry that isn't one of our listed films. Please pick which film you would like to check out: ")
         
-        #identifies which movie the user has chosen and returns the movies information
+        #identifies which movie the user has chosen, prints the movies information, and returns the movie object
         for movie in chosen_genre:
             if user_movie_choice == movie.name:
                 print("Awesome pick! Here are all the details for " + movie.name + ": " + str(movie.get_movie_information()))
+                return movie
 
     
     #returns true/false on whether the movie provided by the user exists within the graph
     else:
         print("Great, we hope we have the movie you're looking for...")
         user_choice = input("Please type in the movie name you are searching for: ")
+
+
+#if applicable the software recommends similar movies to the user
+def find_similiar_movies():
+    pass
         
-software_recommendation(movie_graph)
+search_movie_recommendations(movie_graph)
 
 
