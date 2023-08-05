@@ -82,20 +82,65 @@ def search_movie_recommendations(graph_name):
         while user_genre_choice not in genres:
             user_genre_choice = input("Sorry that's not a valid genre. What genre does your movie fall in: ")
 
-        print("Alright let's check if we have your movie")
+        #prints the appropiate message on whether the movie is found or not
+        print("Alright let's check if we have your movie...\n")
         movie_search_result = movie_graph.find_movie(user_genre_choice, user_movie_choice)
         if movie_search_result == False:
-            print("Sorry it seems we don't have that movie in our inventory!")
+            print("Sorry it seems we don't have that movie in our inventory!\n")
         else:
-            print(movie_search_result)
+            print("We found your movie! Here are the following details for " + user_movie_choice + ": " + str(movie_search_result) + "\n")
+
+        #asks the user if they want to see other recommended movies
+        users_other_recommendations_choice = input("Would you like to see our other recommendations? Please type (y)es or (n)o: ")
+        
+        #ensures the users input is either yes or no
+        while (users_other_recommendations_choice != "y" and users_other_recommendations_choice != "n"):
+            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (y)es if you would like to see other recommeded movies or (n)o if you would like to end")
+        
+        #if the user types yes the find_similar_movies method is called until they're happy with their results
+        find_similiar_movies(movie_graph, users_other_recommendations_choice, user_movie_choice, user_genre_choice)
 
 
 
 #if applicable the software recommends similar movies to the user
-def find_similiar_movies():
-    pass
+def find_similiar_movies(graph, users_input, users_movie, users_genre):
+    #initializing the object version of users_movie
+    movie_object = None
+    
+    #base case
+    if users_input == 'n':
+        print("Thank you for using Aaron's Movie Recommendations.")
+    
+    #recursive step
+    else:
+        #assigns the movie object that corresponds to users_movie
+        for movie in graph.graph[users_genre]:
+            if movie.name == users_movie:
+                movie_object = movie
         
+        #asks which recommended movie the user would like to visit from the orignal users_movie
+        users_second_movie_choice = input("Here are all the following recommended movies for this film " + users_movie + ": " + str(movie_object.edges.keys()) + ". Which movie would you like to know more about: ")
+
+        #ensures that the users input is a valid movie recommendation
+        while users_second_movie_choice not in [movie for movie in movie_object.edges.keys()]:
+            users_second_movie_choice = input("Sorry that's not a valid movie; which movie would you like know more about: ")
+        
+        #returns the information associated with the chosen movie
+        for movie in movie_object.edges.keys():
+            if users_second_movie_choice == movie:
+                print("Nice pick! Heres the following details for " + movie + ": " + str(movie_object.edges[movie]) + "\n")
+        
+        #asks if the user wants to see more recommended movies
+        users_input2 = input("Would you like to see our other recommendations? Please type (y)es or (n)o: ")
+
+        #ensures the users input is either yes or no
+        while (users_input2 != "y" and users_input2 != "n"):
+            users_input2 = input("Sorry I didn't get that. Please type (y)es if you would like to see other recommeded movies or (n)o if you would like to end")
+        
+        #call find_similar_movies recursively
+        find_similiar_movies(graph, users_input2, users_second_movie_choice, users_genre)
+
+
 search_movie_recommendations(movie_graph)
 
-
-#find_movie method wont work in search_movie_recommendations
+#fix the display of the edges for a movie object
