@@ -98,3 +98,4 @@ def find_similiar_movies():
 search_movie_recommendations(movie_graph)
 
 
+#find_movie method wont work in search_movie_recommendations

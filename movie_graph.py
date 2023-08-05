@@ -10,22 +10,11 @@ class MovieGraph():
         else:
             self.graph[movie_vertex.genre] = [movie_vertex]
 
-    #searches for the specified movie using breadth-first search
+    #searches for the specified movie in the specified genre
     def find_movie(self, starting_genre, target_movie):
-        visited = set()
-        queue = [self.graph[starting_genre]]
-
-        while queue:
-            current_vertex = queue.pop()
-            if current_vertex not in visited:
-                visited.add(current_vertex)
-                if current_vertex == target_movie:
-                    print("Found your movie!")
-                    return visited
-                else:
-                    for neighbor in self.graph[current_vertex]:
-                        if neighbor not in visited:
-                            queue.insert(0, neighbor.name)
+        for movie in self.graph[starting_genre]:
+            if movie.name == target_movie:
+                return movie.get_movie_information()
         return False
 
 
