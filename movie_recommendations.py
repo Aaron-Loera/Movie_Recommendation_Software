@@ -51,11 +51,11 @@ def software_recommendation(graph_name):
         movie_chosen = movie_recommendations(graph_name)
         
         #asks the user if they want to see other recommended movies
-        users_other_recommendations_choice = input("Would you like to see our other recommendations or search for another movie? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
+        users_other_recommendations_choice = input("Would you like to see other related movies or search for one? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
             
         #ensures the users input is either yes or no
         while (users_other_recommendations_choice != "s" and users_other_recommendations_choice != "r" and users_other_recommendations_choice != "n"):
-            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations for or, (n) if you would like end your search: ")
+            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see realated movies, (n) if you would like end your search: ")
             
         #if the user types yes the find_similar_movies method is called until they're happy with their results
         find_other_movies(graph_name, users_other_recommendations_choice, movie_chosen)
@@ -66,11 +66,11 @@ def software_recommendation(graph_name):
         movie_chosen = movie_search(graph_name)
 
         #asks the user if they want to see other recommended movies
-        users_other_recommendations_choice = input("Would you like to see our other recommendations or search for another movie? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
+        users_other_recommendations_choice = input("Would you like to see other related movies or search for one? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
             
         #ensures the users input is either yes or no
         while (users_other_recommendations_choice != "s" and users_other_recommendations_choice != "r" and users_other_recommendations_choice != "n"):
-            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations for or, (n) if you would like end your search: ")
+            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see other relate movies or, (n) if you would like end your search: ")
             
         #if the user types yes the find_similar_movies method is called until they're happy with their results
         find_other_movies(graph_name, users_other_recommendations_choice, movie_chosen)
@@ -138,39 +138,70 @@ def find_other_movies(graph_name, users_input, movie_chosen):
     if users_input == 'n':
         print("Thank you for using Aaron's Movie Recommendations.")
 
-    #reursive step for finding other movies if movie is not found
-    elif movie_chosen == None:
-        if users_input == 's':
-            second_movie_chosen = movie_search(graph_name)
-        
-        elif users_input == 'r':
-            second_movie_chosen = movie_recommendations(graph_name)
-    
-    #recursive step for finding other movies if movie does have edges
-    else:
-        #asks which recommended movie the user would like to visit from the orignal users_movie
-        second_movie_chosen = input(f"Here are all the following recommended movies for {movie_chosen}: {movie_chosen.edges.keys()}. Which movie would you like to know more about: ")
+    #reursive step for searching for a movie
+    elif users_input == 's':
+        second_movie_chosen = movie_search(graph_name)
 
-        #ensures that the users input is a valid movie recommendation
-        while second_movie_chosen not in movie_chosen.edges.keys():
-            second_movie_chosen = input("Sorry that's not a valid movie; which movie would you like know more about: ")
-        
-        #returns the information associated with the chosen movie
-        for movie in movie_chosen.edges.keys():
-            if second_movie_chosen == movie:
-                print(f"Nice pick! Heres the following details for {movie}: {movie_chosen.edges[movie]}\n")
-        
-        #asks if the user wants to see more recommended movies
-        users_input2 = input("Would you like to see our other recommendations or search for another movie? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
-        
-        #ensures the users input is either valid
-        while (users_input2 != "s" and users_input2 != "r" and users_input2 != "n"):
-            users_input2 = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations for or, (n) if you would like end your search: ")
-        
-        #call find_similar_movies recursively
-        find_other_movies(graph_name, users_input2, second_movie_chosen)
+        #asks the user if they want to see other recommended movies
+        users_other_recommendations_choice = input("Would you like to see other related movies or search for one? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
+            
+        #ensures the users input is either yes or no
+        while (users_other_recommendations_choice != "s" and users_other_recommendations_choice != "r" and users_other_recommendations_choice != "n"):
+            users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see other relate movies or, (n) if you would like end your search: ")
+            
+        #if the user types yes the find_similar_movies method is called until they're happy with their results
+        find_other_movies(graph_name, users_other_recommendations_choice, second_movie_chosen)
+    
+    #recursive step for finding related movies
+    elif users_input == 'r':
+
+        #if movie_chosen is None then the user can either exit the program or go back to look at the genres
+        if movie_chosen == None:
+            users_input2 = input(f"It seems {movie_chosen} either isn't in our datbase or doesn't have any related movies. Would you like to go back to see our genres? Please type (y)es or (n)o: ")
+
+            while (users_input2 != "y" and users_input2 != "n"):
+                users_input2 = input(f"Sorry that's not a valid option. Would you like to go back to see our genres? Please type (y)es or (n)o: ")
+
+            if users_input2 == "n":
+                find_other_movies(graph_name, users_input2, movie_chosen)
+            
+            else:
+                second_movie_chosen = movie_recommendations(graph_name)
+                
+                #asks the user if they want to see other recommended movies
+                users_other_recommendations_choice = input("Would you like to see other related movies or search for one? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
+            
+                #ensures the users input is either yes or no
+                while (users_other_recommendations_choice != "s" and users_other_recommendations_choice != "r" and users_other_recommendations_choice != "n"):
+                    users_other_recommendations_choice = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see other relate movies or, (n) if you would like end your search: ")
+            
+                #if the user types yes the find_similar_movies method is called until they're happy with their results
+                find_other_movies(graph_name, users_other_recommendations_choice, second_movie_chosen)
+
+        #shows all the related films to user and allows them keep searching for more related films
+        else:
+            #asks which recommended movie the user would like to visit from the orignal users_movie
+            second_movie_chosen = input(f"Here are all the following recommended movies for {movie_chosen}: {movie_chosen.edges.keys()}. Which movie would you like to know more about: ")
+
+            #ensures that the users input is a valid movie
+            while second_movie_chosen not in movie_chosen.edges.keys():
+                second_movie_chosen = input("Sorry that's not a valid movie; which movie would you like know more about: ")
+            
+            #returns the information associated with the chosen movie
+            for movie in movie_chosen.edges.keys():
+                if second_movie_chosen == movie.name:
+                    print(f"Nice pick! Heres the following details for {movie}: {movie_chosen.edges[movie]}\n")
+                    second_movie_chosen = movie
+            
+            #asks if the user wants to see more recommended movies
+            users_input2 = input("Would you like to see our other recommendations or search for another movie? Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations or, (n) if you would like end your search: ")
+            
+            #ensures the users input is either valid
+            while (users_input2 != "s" and users_input2 != "r" and users_input2 != "n"):
+                users_input2 = input("Sorry I didn't get that. Please type (s) if you would like to search for another movie, (r) if you would like to see our other recommendations for or, (n) if you would like end your search: ")
+            
+            #calls find_similar_movies recursively
+            find_other_movies(graph_name, users_input2, second_movie_chosen)
 
 
 software_recommendation(movie_graph)
-
-#a whole bunch of shit wrong with find_other_movies
