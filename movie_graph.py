@@ -14,7 +14,7 @@ class MovieGraph():
     def find_movie(self, starting_genre, target_movie):
         for movie in self.graph[starting_genre]:
             if movie.name == target_movie:
-                return movie.get_movie_information()
+                return movie, movie.get_movie_information()
         return False
 
 
