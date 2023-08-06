@@ -104,29 +104,37 @@ def search_movie_recommendations(graph_name):
 
 #if applicable the software recommends similar movies to the user
 def find_similiar_movies(graph, users_input, users_movie, users_genre):
-    #initializing the object version of users_movie
+    #initializing the object version of users_movie and its corresponding keys
     movie_object = None
-    
+    movie_object_edge_keys = None
+
+    #assigns the movie object that corresponds to users_movie
+    for movie in graph.graph[users_genre]:
+        if movie.name == users_movie:
+            movie_object = movie
+            movie_object_edge_keys = [key for key in movie_object.edges]
+
     #base case
     if users_input == 'n':
         print("Thank you for using Aaron's Movie Recommendations.")
+
+    # #reursive step for finding other movies if movie has no edges
+    # elif movie_object_edge_keys == None:
+    #     users_second_movie_choice = input("It seems we found no recommended films based off the one you provided, please enter another you would like to search for: ")
+    #     users_second_genre_choice = input("Thank You now")
+    #     ###########stopping point##########
     
-    #recursive step
+    #recursive step for finding other movies if movie does have edges
     else:
-        #assigns the movie object that corresponds to users_movie
-        for movie in graph.graph[users_genre]:
-            if movie.name == users_movie:
-                movie_object = movie
-        
         #asks which recommended movie the user would like to visit from the orignal users_movie
-        users_second_movie_choice = input("Here are all the following recommended movies for this film " + users_movie + ": " + str(movie_object.edges.keys()) + ". Which movie would you like to know more about: ")
+        users_second_movie_choice = input("Here are all the following recommended movies for " + users_movie + ": " + str(movie_object_edge_keys) + ". Which movie would you like to know more about: ")
 
         #ensures that the users input is a valid movie recommendation
-        while users_second_movie_choice not in [movie for movie in movie_object.edges.keys()]:
+        while users_second_movie_choice not in movie_object_edge_keys:
             users_second_movie_choice = input("Sorry that's not a valid movie; which movie would you like know more about: ")
         
         #returns the information associated with the chosen movie
-        for movie in movie_object.edges.keys():
+        for movie in movie_object_edge_keys:
             if users_second_movie_choice == movie:
                 print("Nice pick! Heres the following details for " + movie + ": " + str(movie_object.edges[movie]) + "\n")
         
@@ -143,4 +151,4 @@ def find_similiar_movies(graph, users_input, users_movie, users_genre):
 
 search_movie_recommendations(movie_graph)
 
-#fix the display of the edges for a movie object
+#thinking about creating seperate classes for searching movies and recommendation for other movies
