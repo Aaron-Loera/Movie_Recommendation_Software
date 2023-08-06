@@ -35,7 +35,7 @@ movie_graph.add_movie(arrival)
 # print(movie_graph.graph)
 
 
-#beginning of software recommendation system
+#The software recommendation system
 def software_recommendation(graph_name):
 
     #asks for the users input
@@ -91,7 +91,7 @@ def movie_recommendations(graph_name):
 
     #shows all films under the chosen genre and asks the user to choose one
     chosen_genre = graph_name.graph[user_genre_choice]
-    print(f"Great choice! Here are the top films we recommend for this genre, {chosen_genre}")
+    print(f"Great choice! Here are the top films we recommend for this genre: {chosen_genre}")
     user_movie_choice = input("Which film would you like to check out: ")
 
     #varifies if the users input is a valid movie choice
@@ -114,7 +114,7 @@ def movie_search(graph_name):
 
     #askes the user for a specified movie name and movie genre
     user_movie_choice = input("We hope we have the movie you're looking for. Please type in the movie name you are searching for: ")
-    user_genre_choice = input(f"Awesome, and what genre does it fall under from the following {genre_list}:")
+    user_genre_choice = input(f"Awesome, and what genre does it fall under from the following {genre_list}: ")
 
     #checks if the users specified genre is in the provided genres
     while user_genre_choice not in genre_list:
@@ -156,11 +156,11 @@ def find_other_movies(graph_name, users_input, movie_chosen):
     elif users_input == 'r':
 
         #if movie_chosen is None then the user can either exit the program or go back to look at the genres
-        if movie_chosen == None:
-            users_input2 = input(f"It seems {movie_chosen} either isn't in our datbase or doesn't have any related movies. Would you like to go back to see our genres? Please type (y)es or (n)o: ")
+        if movie_chosen == None or movie_chosen.edges == {}:
+            users_input2 = input("It seems your chosen film doesn't have any related movies. Would you like to go back to see our genres? Please type (y)es to look out our genres or (n)o to exit our program: ")
 
             while (users_input2 != "y" and users_input2 != "n"):
-                users_input2 = input(f"Sorry that's not a valid option. Would you like to go back to see our genres? Please type (y)es or (n)o: ")
+                users_input2 = input(f"Sorry that's not a valid option. Would you like to go back to see our genres? Please type (y)es to look out our genres or (n)o to exit our program: ")
 
             if users_input2 == "n":
                 find_other_movies(graph_name, users_input2, movie_chosen)
@@ -178,13 +178,14 @@ def find_other_movies(graph_name, users_input, movie_chosen):
                 #if the user types yes the find_similar_movies method is called until they're happy with their results
                 find_other_movies(graph_name, users_other_recommendations_choice, second_movie_chosen)
 
-        #shows all the related films to user and allows them keep searching for more related films
+        #shows all the related films to user and allows to them keep searching for more related films
         else:
+
             #asks which recommended movie the user would like to visit from the orignal users_movie
             second_movie_chosen = input(f"Here are all the following recommended movies for {movie_chosen}: {movie_chosen.edges.keys()}. Which movie would you like to know more about: ")
 
             #ensures that the users input is a valid movie
-            while second_movie_chosen not in movie_chosen.edges.keys():
+            while second_movie_chosen not in str(movie_chosen.edges.keys()):
                 second_movie_chosen = input("Sorry that's not a valid movie; which movie would you like know more about: ")
             
             #returns the information associated with the chosen movie
@@ -205,3 +206,5 @@ def find_other_movies(graph_name, users_input, movie_chosen):
 
 
 software_recommendation(movie_graph)
+
+#have to fix the related movies portion of find_other_movies
