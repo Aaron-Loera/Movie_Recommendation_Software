@@ -12,7 +12,7 @@ class MovieVertex():
         return "Genre: " + self.genre, "Rating: " + str(self.rating), "Description: " + self.description
 
     #adds a new edge to the current vertex
-    def add_recommended_movies(self, new_movie):
+    def add_related_movies(self, new_movie):
         self.edges[new_movie] = list(new_movie.get_movie_information())
     
     #represents the object as a string
