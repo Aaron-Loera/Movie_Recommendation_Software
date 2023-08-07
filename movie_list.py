@@ -1,6 +1,5 @@
-#imports the MovieVertex class from the movie_vertex file and MovieGraph from the movie_graph file
+#imports the MovieVertex class from the movie_vertex file
 from movie_vertex import MovieVertex
-
 
 #a list of all movie objects
 movie_list = []
@@ -73,7 +72,3 @@ the_hitmans_bodyguard2 = MovieVertex("The Hitman's Bodyguard 2", "Comedy", 3, "O
 movie_list.append(the_hitmans_bodyguard2)
 the_hitmans_bodyguard2.add_related_movies(the_hitmans_bodyguard)
 the_hitmans_bodyguard.add_related_movies(the_hitmans_bodyguard2)
-
-
-#adds all the movies in movie_list to the graph
-for movie in movie_list
